@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.currency.MainActivity"
+    android:layout_weight="3"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/amt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="14dp"
+        android:hint="enter amount"
+         />
+
+    <Spinner
+        android:padding="15dp"
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        />
+
+    <GridView
+        android:padding="10dp"
+        android:id="@+id/RateGrid"
+        android:columnWidth="90dp"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingTop="30dp"
+        android:numColumns="auto_fit"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        />
+</LinearLayout>
