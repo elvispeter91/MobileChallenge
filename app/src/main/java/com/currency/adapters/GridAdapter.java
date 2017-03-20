@@ -1,4 +1,4 @@
-package com.currency;
+package com.currency.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
+import com.currency.R;
+import com.currency.pojo.ExchangeRate;
+
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Elvis Peter on 2017-03-16.
@@ -28,7 +26,6 @@ public class GridAdapter extends BaseAdapter {
     Context context;
     List<String> key;
     ArrayList<Double>valueArray;
-    NumberFormat nm = NumberFormat.getNumberInstance();
     private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.###");
 
     public GridAdapter(Double amt,ExchangeRate exchangeRate,Context context) {
@@ -40,8 +37,6 @@ public class GridAdapter extends BaseAdapter {
         Log.d("vAL", valueArray.toString());
         this.context = context;
     }
-
-
 
     @Override
     public int getCount() {return key.size();
@@ -73,8 +68,13 @@ public class GridAdapter extends BaseAdapter {
         }
         Log.d("amt", ""+amt);
         holder.name.setText(key.get(position));
-        holder.rate.setText(REAL_FORMATTER.format(valueArray.get(position).doubleValue()* amt));
-
+        if(valueArray.get(position) instanceof Double) {
+            holder.rate.setText(REAL_FORMATTER.format(valueArray.get(position) * amt).toString());
+        }else{
+            String num = String.valueOf(valueArray.get(position));
+            double toto = Double.parseDouble(num) * amt;
+            holder.rate.setText(""+toto);
+        }
         return convertView;
     }
 

@@ -1,12 +1,12 @@
 
 
-package com.currency;
+package com.currency.pojo;
 import java.io.Serializable;
 import java.util.HashMap;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

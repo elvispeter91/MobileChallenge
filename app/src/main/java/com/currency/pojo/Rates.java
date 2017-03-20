@@ -1,4 +1,4 @@
-package com.currency;
+package com.currency.pojo;
 
 /**
  * Created by Elvis Peter on 2017-03-15.
@@ -7,7 +7,7 @@ package com.currency;
 import java.io.Serializable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

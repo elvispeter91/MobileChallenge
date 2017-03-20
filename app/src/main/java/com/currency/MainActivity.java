@@ -3,7 +3,9 @@ package com.currency;
 import android.app.Activity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +14,10 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Spinner;
 
-import android.widget.Toast;
+import com.currency.adapters.GridAdapter;
+import com.currency.appInterface.Communicator;
+import com.currency.pojo.ExchangeRate;
+import com.currency.webService.GetExchangeRate;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -24,6 +29,7 @@ public class MainActivity extends Activity implements Communicator {
     Double amtValue;
     GridView gridView;
     GridAdapter gridAdapter;
+    String spinvalue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,24 +47,44 @@ public class MainActivity extends Activity implements Communicator {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
+                spinvalue = parent.getItemAtPosition(position).toString();
 
-              new GetExchangeRate(MainActivity.this).execute(parent.getItemAtPosition(position).toString());
-
-                if(!TextUtils.isEmpty(amount.getText()) && amount.getText()!=null){
+                new GetExchangeRate(MainActivity.this).execute(parent.getItemAtPosition(position).toString());
+                if(!TextUtils.isEmpty(amount.getText()) && amount.getText()!=null ){
                    amtValue = Double.valueOf(amount.getText().toString());
                     Log.d("entr val",""+amtValue);
                 }
-                /*ScheduledExecutorService executor =
-                        Executors.newSingleThreadScheduledExecutor();
+                amount.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        if(!TextUtils.isEmpty(amount.getText()) && amount.getText()!=null ){
+                            amtValue = Double.valueOf(amount.getText().toString());
+                            Log.d("entr val",""+amtValue);
+                            new GetExchangeRate(MainActivity.this).execute(spinvalue);
+                        }
+
+
+                    }
+                });
+                ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
                 Runnable periodicTask = new Runnable() {
                     public void run() {
                         // Invoke method(s) to do the work
-                        new GetExchangeRate(MainActivity.this).execute(spinnerValue.getList().get(position));
+                        new GetExchangeRate(MainActivity.this).execute(spinvalue);
                     }
                 };
-
-                executor.scheduleAtFixedRate(periodicTask, 0, 10, TimeUnit.SECONDS);*/
+                executor.scheduleAtFixedRate(periodicTask, 0, 1800, TimeUnit.SECONDS);
             }
 
             @Override
@@ -73,8 +99,7 @@ public class MainActivity extends Activity implements Communicator {
         Log.d("rate value",data.getRates().toString());
         if(!TextUtils.isEmpty(amount.getText()) && amount.getText()!=null){
         gridAdapter = new GridAdapter(amtValue,data,this);
-        gridAdapter.notifyDataSetChanged();
-            }
+        gridAdapter.notifyDataSetChanged();}
         gridView.setAdapter(gridAdapter);
     }
 }

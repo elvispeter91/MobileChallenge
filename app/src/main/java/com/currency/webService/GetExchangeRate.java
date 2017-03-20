@@ -1,9 +1,11 @@
-package com.currency;
+package com.currency.webService;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.currency.appInterface.Communicator;
+import com.currency.pojo.ExchangeRate;
 import com.google.gson.Gson;
 
 import org.apache.http.HttpEntity;
@@ -46,7 +48,6 @@ public class GetExchangeRate extends AsyncTask<String,ExchangeRate,ExchangeRate>
             result = EntityUtils.toString(getResponseEntity);
             Log.d("HIT:",result);
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,22 +66,16 @@ public class GetExchangeRate extends AsyncTask<String,ExchangeRate,ExchangeRate>
             exchangeRate.setBase(obj.getString("base"));
             exchangeRate.setDate(obj.getString("date"));
             JSONObject rate1 = obj.getJSONObject("rates");
-           // exchangeRate.setRates(new ObjectMapper().readValues(obj.ge));
             try {
                 HashMap<String,Double> rateValue =  new ObjectMapper().readValue(String.valueOf(rate1), HashMap.class);
-               // Log.d("rate value",rateValue.toString());
-
                 exchangeRate.setRates(rateValue);
-
                 Log.d("rate value1",exchangeRate.getRates().toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        //exchangeRate = gson.fromJson(result, ExchangeRate.class);
         return exchangeRate;
     }
 
@@ -89,7 +84,7 @@ public class GetExchangeRate extends AsyncTask<String,ExchangeRate,ExchangeRate>
         super.onPostExecute(exchangeRate);
         if(exchangeRate != null)
         {
-            Log.d("ans",exchangeRate.getBase());
+//            Log.d("ans",exchangeRate.getBase());
             communicator.onTaskFinish(exchangeRate);
         }
 

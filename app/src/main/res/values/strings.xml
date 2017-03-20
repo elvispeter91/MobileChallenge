@@ -3,6 +3,7 @@
 
 
     <string-array name="Country_array">
+        <item>Select</item>
         <item>AUD</item>;
         <item>BGN</item>;
         <item>BRL</item>;
