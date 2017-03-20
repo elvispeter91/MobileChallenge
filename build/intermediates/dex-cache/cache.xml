@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\app\currencyApp\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7dc5ae22dd83b8b289508ec31e3e799e1e20c7b3">
+        <dex dex="C:\app\currencyApp\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ee0c642c2c56a6b1cb8a681f081ed0c35077e690\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\app\currencyApp\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="C:\app\currencyApp\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_f4b971dbdb61c1da2a0f1f5adf884d42e18a8905\classes.dex" />
+    </item>
+
+</items>
