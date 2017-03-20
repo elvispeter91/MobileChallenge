@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements Communicator {
                 new GetExchangeRate(MainActivity.this).execute(parent.getItemAtPosition(position).toString());
                 if(!TextUtils.isEmpty(amount.getText()) && amount.getText()!=null ){
                    amtValue = Double.valueOf(amount.getText().toString());
-                    Log.d("entr val",""+amtValue);
+                    Log.d("entrval",""+amtValue);
                 }
                 amount.addTextChangedListener(new TextWatcher() {
                     @Override
